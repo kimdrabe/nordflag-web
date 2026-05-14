@@ -1,16 +1,16 @@
-url: https://kimdrabe.github.io/nordflag-web
-preview: true
-admin:
-  name: Nordflag CMS
-  description: Content Management System für nordflag.de
+media:
+  input: public
+  output: /public
 
-collections:
+content:
   - name: leistungen
     label: Leistungen
-    description: Unsere Dienstleistungen
+    type: collection
     path: src/content/leistungen
-    format: frontmatter
-    create: true
+    format: yaml-frontmatter
+    view:
+      primary: title
+      sort: order
     fields:
       - name: title
         label: Titel
@@ -18,7 +18,7 @@ collections:
         required: true
       - name: description
         label: Kurzbeschreibung
-        type: string
+        type: text
         required: true
       - name: icon
         label: Icon
@@ -28,13 +28,17 @@ collections:
         label: Reihenfolge
         type: number
         required: true
+      - name: body
+        label: Inhalt
+        type: rich-text
 
   - name: referenzen
     label: Referenzen
-    description: Unsere Projekte & Referenzen
+    type: collection
     path: src/content/referenzen
-    format: frontmatter
-    create: true
+    format: yaml-frontmatter
+    view:
+      primary: title
     fields:
       - name: title
         label: Titel
@@ -42,7 +46,7 @@ collections:
         required: true
       - name: description
         label: Beschreibung
-        type: string
+        type: text
         required: true
       - name: category
         label: Kategorie
@@ -51,14 +55,17 @@ collections:
       - name: url
         label: Website-URL
         type: string
-        required: false
+      - name: body
+        label: Inhalt
+        type: rich-text
 
   - name: testimonials
     label: Kundenbewertungen
-    description: Kundenstimmen
+    type: collection
     path: src/content/testimonials
-    format: frontmatter
-    create: true
+    format: yaml-frontmatter
+    view:
+      primary: name
     fields:
       - name: name
         label: Name
@@ -72,13 +79,18 @@ collections:
         label: Bewertung (1-5)
         type: number
         required: true
+      - name: body
+        label: Bewertungstext
+        type: text
 
   - name: team
     label: Team
-    description: Unser Team
+    type: collection
     path: src/content/team
-    format: frontmatter
-    create: true
+    format: yaml-frontmatter
+    view:
+      primary: name
+      sort: order
     fields:
       - name: name
         label: Name
@@ -92,13 +104,19 @@ collections:
         label: Reihenfolge
         type: number
         required: true
+      - name: body
+        label: Beschreibung
+        type: text
 
   - name: blog
     label: Blog
-    description: Blog & News
+    type: collection
     path: src/content/blog
-    format: frontmatter
-    create: true
+    format: yaml-frontmatter
+    view:
+      primary: title
+      sort: pubDate
+      order: desc
     fields:
       - name: title
         label: Titel
@@ -106,11 +124,11 @@ collections:
         required: true
       - name: description
         label: Beschreibung
-        type: string
+        type: text
         required: true
       - name: pubDate
         label: Veröffentlichungsdatum
-        type: datetime
+        type: date
         required: true
       - name: author
         label: Autor
@@ -120,7 +138,6 @@ collections:
         label: Kategorie
         type: string
         required: true
-      - name: image
-        label: Titelbild
-        type: image
-        required: false
+      - name: body
+        label: Inhalt
+        type: rich-text
