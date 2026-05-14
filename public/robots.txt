@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kimdrabe.github.io/nordflag-web/sitemap-index.xml

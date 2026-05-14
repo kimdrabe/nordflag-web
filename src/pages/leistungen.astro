@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import KontaktCTA from '../components/sections/KontaktCTA.astro';
+
+const leistungen = await getCollection('leistungen');
+const sorted = leistungen.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Leistungen"
+  description="Von individuellen Webseiten über WordPress bis zu modernen Web Apps – Nordflag bietet Ihnen alle Leistungen rund um Webdesign & Webentwicklung aus Lübeck."
+>
+  <section class="pt-32 pb-16 md:pt-40 md:pb-20 bg-gradient-to-b from-nord-50/50 to-white">
+    <div class="container-nord text-center">
+      <span class="inline-block text-nord-500 font-medium text-sm uppercase tracking-widest mb-3">Leistungen</span>
+      <h1 class="section-title mb-4">Unsere Leistungen</h1>
+      <p class="section-subtitle mx-auto">
+        Von der ersten Idee bis zur fertigen Webseite – wir bieten alles aus einer Hand. Maßgeschneidert, transparent und in bester Qualität.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container-nord">
+      <div class="space-y-12">
+        {sorted.map((item, i) => (
+          <div class={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center`}>
+            <div class={`${i % 2 === 1 ? 'lg:order-2' : 'lg:order-1'}`}>
+              <span class="text-nord-500 font-display font-bold text-5xl opacity-10 block mb-2">0{item.data.order}</span>
+              <h2 class="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-4">{item.data.title}</h2>
+              <p class="text-gray-600 leading-relaxed mb-6">{item.data.description}</p>
+              <p class="text-gray-500 leading-relaxed">{item.body}</p>
+            </div>
+            <div class={`${i % 2 === 1 ? 'lg:order-1' : 'lg:order-2'}`}>
+              <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-nord-100 to-nord-50 flex items-center justify-center">
+                <span class="text-8xl font-display font-bold text-nord-500/20">
+                  {String(item.data.order).padStart(2, '0')}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <KontaktCTA />
+</BaseLayout>

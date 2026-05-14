@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import KontaktCTA from '../components/sections/KontaktCTA.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+
+const team = await getCollection('team');
+const sortedTeam = team.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Über uns"
+  description="Lernen Sie Nordflag kennen – Ihr Team für Webdesign & Webentwicklung aus Lübeck. Finn, Lena, Jan und Svenja freuen sich auf Ihr Projekt."
+>
+  <section class="pt-32 pb-16 md:pt-40 md:pb-20 bg-gradient-to-b from-nord-50/50 to-white">
+    <div class="container-nord text-center">
+      <span class="inline-block text-nord-500 font-medium text-sm uppercase tracking-widest mb-3">Über uns</span>
+      <h1 class="section-title mb-4">Digital aus Leidenschaft.<br />Nordisch im Charakter.</h1>
+      <p class="section-subtitle mx-auto">
+        Wir sind ein kleines, feines Team aus Lübeck. Keine Großagentur, kein Einzelkämpfer – sondern eine Gruppe von Menschen, die digitale Produkte lieben und mit Herzblut machen.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding bg-white">
+    <div class="container-nord">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-6">Unsere Geschichte</h2>
+          <div class="space-y-4 text-gray-600 leading-relaxed">
+            <p>
+              Nordflag entstand aus der Überzeugung, dass gute digitale Arbeit mehr braucht als Bauchgefühl. Dass Design nicht nur hübsch, sondern funktional sein muss. Und dass eine Agentur vor allem eines sein sollte: ehrlich.
+            </p>
+            <p>
+              Gegründet in Lübeck, verwurzelt im Norden, arbeiten wir mit Unternehmen zusammen, die Wert auf Qualität legen. Die lieber einmal richtig machen als dreimal schnell. Die verstehen, dass eine gute Webseite eine Investition ist – keine Ausgabe.
+            </p>
+            <p>
+              Unser Ansatz ist einfach: Wir hören zu. Wir denken mit. Und wir liefern Ergebnisse, die sich sehen lassen können. Ob kleines Start-up oder etabliertes Unternehmen – bei uns zählt das Projekt, nicht die Größe des Kunden.
+            </p>
+          </div>
+        </div>
+        <div class="aspect-[4/5] rounded-3xl bg-gradient-to-br from-nord-500 to-nord-700 overflow-hidden relative">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="text-[150px] font-display font-bold text-white/10">NF</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mb-12">
+        <h2 class="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-4">Unser Team</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Vier Köpfe, eine Mission: Ihre digitale Präsenz auf das nächste Level zu heben.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {sortedTeam.map((member, i) => (
+          <div class="text-center p-6 rounded-2xl bg-gray-50 hover:bg-nord-50 transition-colors duration-300 animate-on-scroll opacity-0 translate-y-4 transition-all duration-500" style={`transition-delay: ${i * 100}ms`}>
+            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-nord-500 to-nord-400 mx-auto mb-4 flex items-center justify-center text-white font-display font-bold text-2xl">
+              {member.data.name.split(' ').map(n => n[0]).join('')}
+            </div>
+            <h3 class="font-display font-semibold text-gray-900">{member.data.name}</h3>
+            <p class="text-nord-500 text-sm font-medium mb-3">{member.data.role}</p>
+            <p class="text-gray-500 text-sm leading-relaxed">{member.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-gray-950 text-white">
+    <div class="container-nord">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="text-4xl md:text-5xl font-display font-bold gradient-text mb-2">50+</div>
+          <div class="text-gray-400 text-sm">zufriedene Kunden</div>
+        </div>
+        <div>
+          <div class="text-4xl md:text-5xl font-display font-bold text-nord-red mb-2">8+</div>
+          <div class="text-gray-400 text-sm">Jahre Erfahrung</div>
+        </div>
+        <div>
+          <div class="text-4xl md:text-5xl font-display font-bold gradient-text mb-2">100+</div>
+          <div class="text-gray-400 text-sm">realisierte Projekte</div>
+        </div>
+        <div>
+          <div class="text-4xl md:text-5xl font-display font-bold text-nord-red mb-2">98%</div>
+          <div class="text-gray-400 text-sm">Weiterempfehlung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Testimonials />
+  <KontaktCTA />
+</BaseLayout>

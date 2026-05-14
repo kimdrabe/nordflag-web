@@ -1,0 +1,126 @@
+url: https://kimdrabe.github.io/nordflag-web
+preview: true
+admin:
+  name: Nordflag CMS
+  description: Content Management System für nordflag.de
+
+collections:
+  - name: leistungen
+    label: Leistungen
+    description: Unsere Dienstleistungen
+    path: src/content/leistungen
+    format: frontmatter
+    create: true
+    fields:
+      - name: title
+        label: Titel
+        type: string
+        required: true
+      - name: description
+        label: Kurzbeschreibung
+        type: string
+        required: true
+      - name: icon
+        label: Icon
+        type: string
+        required: true
+      - name: order
+        label: Reihenfolge
+        type: number
+        required: true
+
+  - name: referenzen
+    label: Referenzen
+    description: Unsere Projekte & Referenzen
+    path: src/content/referenzen
+    format: frontmatter
+    create: true
+    fields:
+      - name: title
+        label: Titel
+        type: string
+        required: true
+      - name: description
+        label: Beschreibung
+        type: string
+        required: true
+      - name: category
+        label: Kategorie
+        type: string
+        required: true
+      - name: url
+        label: Website-URL
+        type: string
+        required: false
+
+  - name: testimonials
+    label: Kundenbewertungen
+    description: Kundenstimmen
+    path: src/content/testimonials
+    format: frontmatter
+    create: true
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: role
+        label: Position / Unternehmen
+        type: string
+        required: true
+      - name: rating
+        label: Bewertung (1-5)
+        type: number
+        required: true
+
+  - name: team
+    label: Team
+    description: Unser Team
+    path: src/content/team
+    format: frontmatter
+    create: true
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: role
+        label: Position
+        type: string
+        required: true
+      - name: order
+        label: Reihenfolge
+        type: number
+        required: true
+
+  - name: blog
+    label: Blog
+    description: Blog & News
+    path: src/content/blog
+    format: frontmatter
+    create: true
+    fields:
+      - name: title
+        label: Titel
+        type: string
+        required: true
+      - name: description
+        label: Beschreibung
+        type: string
+        required: true
+      - name: pubDate
+        label: Veröffentlichungsdatum
+        type: datetime
+        required: true
+      - name: author
+        label: Autor
+        type: string
+        required: true
+      - name: category
+        label: Kategorie
+        type: string
+        required: true
+      - name: image
+        label: Titelbild
+        type: image
+        required: false

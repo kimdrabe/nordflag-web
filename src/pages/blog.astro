@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const blogPosts = await getCollection('blog');
+const sorted = blogPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<BaseLayout
+  title="Blog"
+  description="Aktuelle Artikel, Tipps und Einblicke rund um Webdesign, Webentwicklung und digitale Strategien – aus Lübeck für Deutschland."
+>
+  <section class="pt-32 pb-16 md:pt-40 md:pb-20 bg-gradient-to-b from-nord-50/50 to-white">
+    <div class="container-nord text-center">
+      <span class="inline-block text-nord-500 font-medium text-sm uppercase tracking-widest mb-3">Blog</span>
+      <h1 class="section-title mb-4">Aktuelles & Einblicke</h1>
+      <p class="section-subtitle mx-auto">
+        Tipps, Gedanken und Geschichten rund um Webdesign, Webentwicklung und digitale Strategien. Aus der Praxis – für Ihre Praxis.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container-nord">
+      {sorted.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {sorted.map((post, i) => (
+            <article class="group card-hover animate-on-scroll opacity-0 translate-y-4 transition-all duration-500" style={`transition-delay: ${i * 100}ms`}>
+              <div class="aspect-[16/10] rounded-xl bg-gradient-to-br from-nord-100 to-nord-50 mb-5 flex items-center justify-center overflow-hidden">
+                {post.data.image ? (
+                  <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover" />
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0A66FF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="opacity-30"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                )}
+              </div>
+              <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                <span class="px-2 py-1 rounded-full bg-nord-50 text-nord-600 font-medium">{post.data.category}</span>
+                <span>{new Date(post.data.pubDate).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              </div>
+              <h2 class="text-lg font-display font-semibold text-gray-900 mb-2 group-hover:text-nord-500 transition-colors line-clamp-2">{post.data.title}</h2>
+              <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">{post.data.description}</p>
+              <a href={`/blog/${post.slug}`} class="inline-flex items-center gap-1 text-nord-500 text-sm font-medium hover:gap-2 transition-all">
+                Weiterlesen
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-20">
+          <span class="text-6xl mb-4 block">📝</span>
+          <h2 class="text-2xl font-display font-bold text-gray-900 mb-3">Noch keine Blogbeiträge</h2>
+          <p class="text-gray-600">Wir arbeiten an spannenden Inhalten. Schauen Sie bald wieder vorbei!</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

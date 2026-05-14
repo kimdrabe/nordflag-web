@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import Testimonials from '../components/sections/Testimonials.astro';
+import KontaktCTA from '../components/sections/KontaktCTA.astro';
+
+const referenzen = await getCollection('referenzen');
+const categories = [...new Set(referenzen.map(r => r.data.category))];
+---
+
+<BaseLayout
+  title="Referenzen"
+  description="Unsere Projekte sprechen für sich. Entdecken Sie eine Auswahl unserer Arbeiten in Webdesign, Webentwicklung und WordPress aus Lübeck."
+>
+  <section class="pt-32 pb-16 md:pt-40 md:pb-20 bg-gradient-to-b from-nord-50/50 to-white">
+    <div class="container-nord text-center">
+      <span class="inline-block text-nord-500 font-medium text-sm uppercase tracking-widest mb-3">Referenzen</span>
+      <h1 class="section-title mb-4">Unsere Projekte</h1>
+      <p class="section-subtitle mx-auto">
+        Eine Auswahl unserer Arbeiten. Jedes Projekt ist ein Unikat – mit eigener Herausforderung, eigener Lösung und eigener Geschichte.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container-nord">
+      <div class="flex flex-wrap gap-3 mb-10">
+        <button class="px-4 py-2 rounded-full bg-nord-500 text-white text-sm font-medium transition-all filter-btn active" data-filter="all">Alle</button>
+        {categories.map(cat => (
+          <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 text-sm font-medium transition-all filter-btn" data-filter={cat}>{cat}</button>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" id="projectsGrid">
+        {referenzen.map((ref, i) => (
+          <article class="project-card group relative overflow-hidden rounded-2xl bg-white border border-gray-100 hover:shadow-nord-lg transition-all duration-500 animate-on-scroll opacity-0 translate-y-4" style={`transition-delay: ${i * 100}ms`} data-category={ref.data.category}>
+            <div class="p-8">
+              <span class="inline-block px-3 py-1 rounded-full bg-nord-50 text-nord-600 text-xs font-medium mb-4">{ref.data.category}</span>
+              <h2 class="text-xl font-display font-semibold text-gray-900 mb-3 group-hover:text-nord-500 transition-colors">{ref.data.title}</h2>
+              <p class="text-gray-600 text-sm leading-relaxed mb-6">{ref.data.description}</p>
+              {ref.data.url && (
+                <a href={ref.data.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-nord-500 text-sm font-medium hover:gap-2 transition-all">
+                  Projekt ansehen
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Testimonials />
+  <KontaktCTA />
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('bg-nord-500', 'text-white');
+        b.classList.add('bg-gray-100', 'text-gray-600');
+      });
+      btn.classList.remove('bg-gray-100', 'text-gray-600');
+      btn.classList.add('bg-nord-500', 'text-white');
+
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.project-card').forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>

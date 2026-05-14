@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import LeistungenGrid from '../components/sections/LeistungenGrid.astro';
+import WarumNordflag from '../components/sections/WarumNordflag.astro';
+import ReferenzenShowcase from '../components/sections/ReferenzenShowcase.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import Prozess from '../components/sections/Prozess.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import KontaktCTA from '../components/sections/KontaktCTA.astro';
+---
+
+<BaseLayout
+  title="Nordflag – Webdesign & Webentwicklung aus Lübeck"
+  description="Nordflag entwickelt maßgeschneiderte Webseiten, moderne Web Apps und WordPress-Lösungen für Unternehmen aus Lübeck und ganz Deutschland. Digital, modern, nordisch."
+  ogType="website"
+>
+  <Hero />
+  <LeistungenGrid />
+  <WarumNordflag />
+  <ReferenzenShowcase />
+  <Testimonials />
+  <Prozess />
+  <FAQ />
+  <KontaktCTA />
+</BaseLayout>

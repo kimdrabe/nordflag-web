@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+
+const referenzen = await getCollection('referenzen');
+---
+
+<section class="section-padding bg-gray-50/50">
+  <div class="container-nord">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="inline-block text-nord-500 font-medium text-sm uppercase tracking-widest mb-3">Referenzen</span>
+      <h2 class="section-title mb-4">Projekte, die für sich sprechen</h2>
+      <p class="section-subtitle mx-auto">
+        Jedes Projekt ist ein Unikat. Hier zeigen wir eine Auswahl unserer Arbeiten – mit Liebe zum Detail und dem Anspruch, jedes Mal das Beste herauszuholen.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+      {referenzen.map((ref, i) => (
+        <article class="group relative overflow-hidden rounded-2xl bg-white border border-gray-100 hover:shadow-nord-lg transition-all duration-500 animate-on-scroll opacity-0 translate-y-4" style={`transition-delay: ${i * 100}ms`}>
+          <div class="p-8">
+            <span class="inline-block px-3 py-1 rounded-full bg-nord-50 text-nord-600 text-xs font-medium mb-4">{ref.data.category}</span>
+            <h3 class="text-xl font-display font-semibold text-gray-900 mb-3 group-hover:text-nord-500 transition-colors">{ref.data.title}</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6">{ref.data.description}</p>
+            {ref.data.url && (
+              <a href={ref.data.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-nord-500 text-sm font-medium hover:gap-2 transition-all">
+                Projekt ansehen
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            )}
+          </div>
+          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-nord-500/5 to-transparent rounded-bl-full" />
+        </article>
+      ))}
+    </div>
+
+    <div class="text-center mt-12 animate-on-scroll opacity-0">
+      <a href="/referenzen" class="btn-secondary">
+        Alle Referenzen ansehen
+      </a>
+    </div>
+  </div>
+</section>

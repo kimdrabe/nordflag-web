@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+
+const testimonials = await getCollection('testimonials');
+---
+
+<section class="section-padding bg-white overflow-hidden">
+  <div class="container-nord">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="inline-block text-nord-500 font-medium text-sm uppercase tracking-widest mb-3">Kundenstimmen</span>
+      <h2 class="section-title mb-4">Was unsere Kunden sagen</h2>
+      <p class="section-subtitle mx-auto">
+        Die besten Referenzen sind zufriedene Kunden. Lesen Sie selbst, warum Unternehmen aus der Region auf Nordflag vertrauen.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+      {testimonials.map((item, i) => (
+        <figure class="relative p-8 rounded-2xl bg-gray-50 border border-gray-100 animate-on-scroll opacity-0 translate-y-4 transition-all duration-500" style={`transition-delay: ${i * 100}ms`}>
+          <div class="flex gap-1 mb-4">
+            {Array.from({ length: 5 }).map((_, star) => (
+              <svg key={star} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill={star < item.data.rating ? '#0A66FF' : '#E5E7EB'} stroke={star < item.data.rating ? '#0A66FF' : '#E5E7EB'} stroke-width="1">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            ))}
+          </div>
+          <blockquote class="text-gray-700 leading-relaxed mb-6">
+            &bdquo;{item.body}&rdquo;
+          </blockquote>
+          <figcaption class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-nord-500 flex items-center justify-center text-white font-semibold text-sm">
+              {item.data.name.split(' ').map(n => n[0]).join('')}
+            </div>
+            <div>
+              <div class="font-display font-semibold text-gray-900 text-sm">{item.data.name}</div>
+              <div class="text-gray-500 text-xs">{item.data.role}</div>
+            </div>
+          </figcaption>
+          <div class="absolute top-0 right-0 text-6xl text-nord-500/5 font-serif leading-none p-8">"</div>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

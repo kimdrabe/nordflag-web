@@ -1,0 +1,102 @@
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+  <nav class="container-nord">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <a href="/" class="flex items-center gap-2 group" aria-label="Nordflag Startseite">
+        <span class="text-2xl md:text-3xl font-display font-bold tracking-tight">
+          <span class="text-nord-500">N</span><span class="text-nord-red">F</span>
+        </span>
+        <span class="hidden sm:block text-sm font-medium text-gray-600 group-hover:text-nord-500 transition-colors">
+          nordflag
+        </span>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="/" class="nav-link">Start</a>
+        <a href="/leistungen" class="nav-link">Leistungen</a>
+        <a href="/referenzen" class="nav-link">Referenzen</a>
+        <a href="/ueber-uns" class="nav-link">Über uns</a>
+        <a href="/blog" class="nav-link">Blog</a>
+        <a href="/kontakt" class="btn-primary text-sm px-5 py-2.5">
+          Kontakt
+        </a>
+      </div>
+
+      <button class="lg:hidden p-2 text-gray-700 hover:text-nord-500 transition-colors" id="menuToggle" aria-label="Menü öffnen">
+        <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobileMenu" class="lg:hidden hidden">
+    <div class="glass border-t border-gray-100 px-4 py-6 space-y-4">
+      <a href="/" class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Start</a>
+      <a href="/leistungen" class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Leistungen</a>
+      <a href="/referenzen" class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Referenzen</a>
+      <a href="/ueber-uns" class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Über uns</a>
+      <a href="/blog" class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Blog</a>
+      <a href="/kontakt" class="btn-primary inline-block text-center mt-2">Kontakt</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav-link {
+    @apply text-sm font-medium text-gray-600 hover:text-nord-500 transition-colors relative py-1;
+  }
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-nord-500 transition-all duration-300;
+  }
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  #navbar:not(.scrolled) {
+    @apply bg-transparent;
+  }
+  #navbar.scrolled {
+    @apply bg-white/90 backdrop-blur-lg shadow-sm;
+  }
+</style>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuIcon = document.getElementById('menuIcon');
+  const closeIcon = document.getElementById('closeIcon');
+
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+    lastScroll = currentScroll;
+  });
+
+  menuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+
+  document.querySelectorAll('#mobileMenu a').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    });
+  });
+</script>
