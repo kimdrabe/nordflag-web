@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
 const referenzen = await getCollection('referenzen');
 ---
 
@@ -34,7 +35,7 @@ const referenzen = await getCollection('referenzen');
     </div>
 
     <div class="text-center mt-12 animate-on-scroll opacity-0">
-      <a href="/referenzen" class="btn-secondary">
+      <a href={`${base}referenzen`} class="btn-secondary">
         Alle Referenzen ansehen
       </a>
     </div>

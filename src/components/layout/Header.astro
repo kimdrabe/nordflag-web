@@ -1,7 +1,11 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+
 <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
   <nav class="container-nord">
     <div class="flex items-center justify-between h-16 md:h-20">
-      <a href="/" class="flex items-center gap-2 group" aria-label="Nordflag Startseite">
+      <a href={base} class="flex items-center gap-2 group" aria-label="Nordflag Startseite">
         <span class="text-2xl md:text-3xl font-display font-bold tracking-tight">
           <span class="text-nord-500">N</span><span class="text-nord-red">F</span>
         </span>
@@ -11,12 +15,12 @@
       </a>
 
       <div class="hidden lg:flex items-center gap-8">
-        <a href="/" class="nav-link">Start</a>
-        <a href="/leistungen" class="nav-link">Leistungen</a>
-        <a href="/referenzen" class="nav-link">Referenzen</a>
-        <a href="/ueber-uns" class="nav-link">Über uns</a>
-        <a href="/blog" class="nav-link">Blog</a>
-        <a href="/kontakt" class="btn-primary text-sm px-5 py-2.5">
+        <a href={base} class="nav-link">Start</a>
+        <a href={`${base}leistungen`} class="nav-link">Leistungen</a>
+        <a href={`${base}referenzen`} class="nav-link">Referenzen</a>
+        <a href={`${base}ueber-uns`} class="nav-link">Über uns</a>
+        <a href={`${base}blog`} class="nav-link">Blog</a>
+        <a href={`${base}kontakt`} class="btn-primary text-sm px-5 py-2.5">
           Kontakt
         </a>
       </div>
@@ -37,12 +41,12 @@
 
   <div id="mobileMenu" class="lg:hidden hidden">
     <div class="glass border-t border-gray-100 px-4 py-6 space-y-4">
-      <a href="/" class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Start</a>
-      <a href="/leistungen" class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Leistungen</a>
-      <a href="/referenzen" class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Referenzen</a>
-      <a href="/ueber-uns" class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Über uns</a>
-      <a href="/blog" class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Blog</a>
-      <a href="/kontakt" class="btn-primary inline-block text-center mt-2">Kontakt</a>
+      <a href={base} class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Start</a>
+      <a href={`${base}leistungen`} class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Leistungen</a>
+      <a href={`${base}referenzen`} class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Referenzen</a>
+      <a href={`${base}ueber-uns`} class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Über uns</a>
+      <a href={`${base}blog`} class="block py-2 text-gray-700 hover:text-nord-500 font-medium">Blog</a>
+      <a href={`${base}kontakt`} class="btn-primary inline-block text-center mt-2">Kontakt</a>
     </div>
   </div>
 </header>
